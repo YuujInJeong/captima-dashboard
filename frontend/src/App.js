@@ -4,7 +4,6 @@ import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Dashboard from './components/Dashboard/Dashboard';
 import SalesAnalysis from './components/SalesAnalysis/SalesAnalysis';
-
 function App() {
   return (
     <Router>
