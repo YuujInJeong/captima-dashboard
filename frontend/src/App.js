@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Dashboard from './components/Dashboard/Dashboard';
-import SalesAnalysis from './components/SalesAnalysis/SalesAnalysis';
+import SalesAnalysis from './components/SalesAnalysis';
 function App() {
   return (
     <Router>
