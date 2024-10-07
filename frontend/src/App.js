@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Footer from './components/Layout/Footer';
-
+import Analysis from './pages/Analysis';
 
 const generateMockData = () => {
   const startDate = new Date('2024-01-01');
