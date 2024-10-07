@@ -11,6 +11,36 @@ const KPICard = ({ title, value, unit }) => (
     </p>
   </div>
 );
+const FileUpload = () => {
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (file) {
+      alert(`파일 "${file.name}"이 업로드되었습니다. (실제 업로드는 구현되지 않았습니다)`);
+      setFile(null);
+    }
+  };
+
+  return (
+    <div className="mb-8">
+      <h2 className="text-xl font-semibold mb-4">파일 업로드</h2>
+      <form onSubmit={handleSubmit} className="flex items-center">
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="border p-2 mr-2"
+        />
+        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">업로드</button>
+      </form>
+    </div>
+  );
+};
+
 const SalesChart = ({ data }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
@@ -27,42 +57,42 @@ const SalesChart = ({ data }) => {
 
   const handleCopyToClipboard = () => {
     const text = `아직 챗봇은 연결되지 않았습니다. 하단은 예시 답변입니다.
-  
-  2024년 9월 농심 새우깡의 판매량이 전월 대비 37% 증가한 주요 요인 분석:
-  
-  1. 신규 마케팅 캠페인 효과:
-     - '추억의 맛' 컨셉의 TV 광고 론칭 (9월 1일)
-     - 광고 효과: 첫 주 판매량 22% 증가, 브랜드 검색량 56% 상승
-  
-  2. SNS 밈 현상:
-     - 인기 유튜버 '먹방스타' 새우깡 챌린지 영상 viral (9월 10일)
-     - 관련 해시태그 사용 건수: 150만 건 돌파
-     - 20대 구매자 비율 15%p 증가
-  
-  3. 건강 스낵 트렌드 부합:
-     - 새우깡 '30% 더 가볍게' 리뉴얼 제품 출시 (8월 말)
-     - 칼로리 20% 감소, 단백질 함량 10% 증가
-     - 헬스 커뮤니티에서 긍정적 리뷰 다수 (평점 4.5/5)
-  
-  4. 대규모 프로모션 진행:
-     - 주요 편의점 체인과 1+1 프로모션 (9월 15일-30일)
-     - 온라인 쇼핑몰 '깜짝 세일' 3시간 동안 50% 할인 (9월 20일)
-     - 프로모션 기간 동안 일 평균 판매량 2.5배 증가
-  
-  5. 경쟁사 대비 우위:
-     - 주 경쟁사 P사의 생산라인 일시 중단 (9월 5일-12일)
-     - 새우깡의 시장 점유율 5%p 상승 (35% → 40%)
-  
-  6. 계절적 요인:
-     - 9월 추석 명절 선물세트 판매 호조 (전년 대비 18% 증가)
-     - 가을 나들이 시즌과 맞물린 포장 스낵 수요 증가
-  
-  7. 원재료 가격 안정화:
-     - 주 원료인 새우 가격 10% 하락으로 이익률 개선
-     - 가격 경쟁력 확보로 대형마트 입점 물량 15% 확대
-  
-  결론: 9월의 판매량 급증은 전략적 마케팅, 제품 혁신, 외부 환경 변화, 그리고 시의적절한 프로모션의 시너지 효과로 분석됩니다. 특히 SNS를 통한 바이럴 마케팅과 건강 트렌드에 부합한 제품 리뉴얼이 젊은 층의 새로운 수요를 창출한 것으로 보입니다.`;
-  
+
+2024년 9월 농심 새우깡의 판매량이 전월 대비 37% 증가한 주요 요인 분석:
+
+1. 신규 마케팅 캠페인 효과:
+   - '추억의 맛' 컨셉의 TV 광고 론칭 (9월 1일)
+   - 광고 효과: 첫 주 판매량 22% 증가, 브랜드 검색량 56% 상승
+
+2. SNS 밈 현상:
+   - 인기 유튜버 '먹방스타' 새우깡 챌린지 영상 viral (9월 10일)
+   - 관련 해시태그 사용 건수: 150만 건 돌파
+   - 20대 구매자 비율 15%p 증가
+
+3. 건강 스낵 트렌드 부합:
+   - 새우깡 '30% 더 가볍게' 리뉴얼 제품 출시 (8월 말)
+   - 칼로리 20% 감소, 단백질 함량 10% 증가
+   - 헬스 커뮤니티에서 긍정적 리뷰 다수 (평점 4.5/5)
+
+4. 대규모 프로모션 진행:
+   - 주요 편의점 체인과 1+1 프로모션 (9월 15일-30일)
+   - 온라인 쇼핑몰 '깜짝 세일' 3시간 동안 50% 할인 (9월 20일)
+   - 프로모션 기간 동안 일 평균 판매량 2.5배 증가
+
+5. 경쟁사 대비 우위:
+   - 주 경쟁사 P사의 생산라인 일시 중단 (9월 5일-12일)
+   - 새우깡의 시장 점유율 5%p 상승 (35% → 40%)
+
+6. 계절적 요인:
+   - 9월 추석 명절 선물세트 판매 호조 (전년 대비 18% 증가)
+   - 가을 나들이 시즌과 맞물린 포장 스낵 수요 증가
+
+7. 원재료 가격 안정화:
+   - 주 원료인 새우 가격 10% 하락으로 이익률 개선
+   - 가격 경쟁력 확보로 대형마트 입점 물량 15% 확대
+
+결론: 9월의 판매량 급증은 전략적 마케팅, 제품 혁신, 외부 환경 변화, 그리고 시의적절한 프로모션의 시너지 효과로 분석됩니다. 특히 SNS를 통한 바이럴 마케팅과 건강 트렌드에 부합한 제품 리뉴얼이 젊은 층의 새로운 수요를 창출한 것으로 보입니다.`;
+
     navigator.clipboard.writeText(text).then(() => {
       alert('상세 분석 내용이 클립보드에 복사되었습니다.');
     }, (err) => {
@@ -116,6 +146,7 @@ const Dashboard = () => {
         <KPICard title="목표 달성률" value={kpis.targetAchievementRate.toFixed(2)} unit="%" />
         <KPICard title="일평균 판매량" value={kpis.averageDailySales} unit="개" />
       </div>
+      <FileUpload />
       <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
         <h2 className="text-xl font-semibold mb-4">일별 판매량 추이</h2>
         <SalesChart data={salesData} />

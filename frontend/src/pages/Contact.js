@@ -30,7 +30,7 @@ const Contact = () => {
           <strong>이메일:</strong> yujin010917@khu.ac.kr
         </p>  
         <p className="mb-4">
-          <strong>주소:</strong> 서울특별시 동대문구 경희대로 26 경희대학교
+          <strong>주소:</strong> 경기도 용인시 기흥구 덕영대로 1732 경희대학교 공과대학 360호 캡티마
         </p>
         <h3 className="text-xl font-semibold mb-2">대회 정보</h3>
         <p className="mb-2">
