@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { calculateKPIs, generateMockData } from '../../utils/dataUtils';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 const KPICard = ({ title, value, unit }) => (
   <div className="bg-white rounded-lg shadow-sm p-6 transition duration-300 ease-in-out hover:shadow-md">
@@ -11,6 +12,7 @@ const KPICard = ({ title, value, unit }) => (
     </p>
   </div>
 );
+
 const FileUpload = () => {
   const [file, setFile] = useState(null);
 
@@ -41,21 +43,30 @@ const FileUpload = () => {
   );
 };
 
+
 const SalesChart = ({ data }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
-  const popupRef = useRef(null);
+  const chartRef = useRef(null);
 
-  const handleMouseEnter = (e) => {
+  const handleMouseMove = useCallback((e) => {
+    if (chartRef.current) {
+      const chartRect = chartRef.current.getBoundingClientRect();
+      const x = e.clientX - chartRect.left;
+      const y = e.clientY - chartRect.top;
+      setPopupPosition({ x, y });
+    }
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
     setShowPopup(true);
-    setPopupPosition({ x: e.clientX, y: e.clientY });
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setShowPopup(false);
-  };
+  }, []);
 
-  const handleCopyToClipboard = () => {
+  const handleCopyToClipboard = useCallback(() => {
     const text = `아직 챗봇은 연결되지 않았습니다. 하단은 예시 답변입니다.
 
 2024년 9월 농심 새우깡의 판매량이 전월 대비 37% 증가한 주요 요인 분석:
@@ -98,12 +109,12 @@ const SalesChart = ({ data }) => {
     }, (err) => {
       console.error('클립보드 복사 실패: ', err);
     });
-  };
+  }, []);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={chartRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis />
@@ -115,15 +126,14 @@ const SalesChart = ({ data }) => {
       </ResponsiveContainer>
       {showPopup && (
         <div 
-          ref={popupRef}
           className="absolute bg-white border border-gray-200 rounded-md shadow-lg p-4 z-10"
-          style={{ left: popupPosition.x, top: popupPosition.y }}
+          style={{ left: popupPosition.x + 10, top: popupPosition.y + 10 }}
         >
-          <p>아직 챗봇은 연결되지 않았습니다. 하단은 예시 답변입니다.</p>
-          <p>"2024년 9월 농심 새우깡의 판매량이 급격히 증가한 것은..."</p>
+          <p className="text-sm text-gray-500 mb-2">아직 챗봇은 연결되지 않았습니다. 하단은 예시 답변입니다.</p>
+          <p className="text-sm font-medium mb-2">"2024년 9월 농심 새우깡의 판매량이 급격히 증가한 것은..."</p>
           <button 
             onClick={handleCopyToClipboard}
-            className="mt-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+            className="mt-2 bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 text-sm"
           >
             전체 텍스트 복사
           </button>
