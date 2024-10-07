@@ -1,9 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import SalesChart from '../components/Dashboard/SalesChart';
-import { calculateKPIs } from '../utils/dataUtils'; // 이 유틸리티 함수는 아래에서 정의하겠습니다.
+import { calculateKPIs, generateMockData } from '../utils/dataUtils';
 
-const Analysis = ({ salesData }) => {
+const Analysis = () => {
   const [timeRange, setTimeRange] = useState('all');
+  
+  // 모의 데이터 생성
+  const salesData = useMemo(() => generateMockData(), []);
 
   const filteredData = useMemo(() => {
     if (timeRange === 'all') return salesData;

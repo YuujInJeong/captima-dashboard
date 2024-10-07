@@ -12,15 +12,18 @@ const Header = () => (
             </Link>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-            {['대시보드', '분석', '소개', '문의'].map((item, index) => (
-              <Link
-                key={index}
-                to={index === 0 ? '/' : `/${item}`}
-                className="text-gray-900 hover:text-toss-blue transition-colors duration-200 inline-flex items-center px-1 pt-1 text-sm font-medium"
-              >
-                {item}
-              </Link>
-            ))}
+            <Link to="/" className="text-gray-900 hover:text-toss-blue transition-colors duration-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+              대시보드
+            </Link>
+            <Link to="/분석" className="text-gray-900 hover:text-toss-blue transition-colors duration-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+              분석
+            </Link>
+            <Link to="/소개" className="text-gray-900 hover:text-toss-blue transition-colors duration-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+              소개
+            </Link>
+            <Link to="/문의" className="text-gray-900 hover:text-toss-blue transition-colors duration-200 inline-flex items-center px-1 pt-1 text-sm font-medium">
+              문의
+            </Link>
           </div>
         </div>
       </div>

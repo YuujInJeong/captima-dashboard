@@ -12,7 +12,6 @@ export const calculateKPIs = (data) => {
     averageDailySales: Math.round(totalSales / totalDays)
   };
 };
-
 export const generateMockData = () => {
   const startDate = new Date('2024-01-01');
   const endDate = new Date('2024-09-30');
