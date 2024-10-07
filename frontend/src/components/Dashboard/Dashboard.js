@@ -46,17 +46,7 @@ const FileUpload = () => {
 
 const SalesChart = ({ data }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const chartRef = useRef(null);
-
-  const handleMouseMove = useCallback((e) => {
-    if (chartRef.current) {
-      const chartRect = chartRef.current.getBoundingClientRect();
-      const x = e.clientX - chartRect.left;
-      const y = e.clientY - chartRect.top;
-      setPopupPosition({ x, y });
-    }
-  }, []);
 
   const handleMouseEnter = useCallback(() => {
     setShowPopup(true);
@@ -112,9 +102,13 @@ const SalesChart = ({ data }) => {
   }, []);
 
   return (
-    <div className="relative" ref={chartRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="relative" ref={chartRef}>
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data}>
+        <LineChart 
+          data={data}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis />
@@ -127,7 +121,7 @@ const SalesChart = ({ data }) => {
       {showPopup && (
         <div 
           className="absolute bg-white border border-gray-200 rounded-md shadow-lg p-4 z-10"
-          style={{ left: popupPosition.x + 10, top: popupPosition.y + 10 }}
+          style={{ right: '10px', top: '10px', maxWidth: '300px' }}
         >
           <p className="text-sm text-gray-500 mb-2">아직 챗봇은 연결되지 않았습니다. 하단은 예시 답변입니다.</p>
           <p className="text-sm font-medium mb-2">"2024년 9월 농심 새우깡의 판매량이 급격히 증가한 것은..."</p>
