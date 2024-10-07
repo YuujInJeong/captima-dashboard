@@ -40,8 +40,11 @@ const App = () => {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Dashboard kpis={kpis} salesData={mockSalesData} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );
