@@ -43,9 +43,9 @@ const App = () => {
         <Header />
         <main className="flex-grow">
           <Routes>
-            <Route path="/" element={<Dashboard kpis={kpis} salesData={mockSalesData} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/분석" element={<Analysis />} />
+            <Route path="/소개" element={<About />} />
+            <Route path="/문의" element={<Contact />} />
           </Routes>
         </main>
         <Footer />
