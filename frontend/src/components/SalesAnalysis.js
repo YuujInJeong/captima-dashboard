@@ -1,77 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// 임시 데이터 생성 함수
-const generateData = (days) => {
-  const data = [];
-  for (let i = 0; i < days; i++) {
-    data.push({
-      date: `2024-${String(Math.floor(i / 30) + 1).padStart(2, '0')}-${String(i % 30 + 1).padStart(2, '0')}`,
-      sales: Math.floor(Math.random() * 5000) + 5000,
-    });
-  }
-  return data;
-};
-
-const salesData = generateData(180);
-
-const calculateMovingAverage = (data, days) => {
-  return data.map((item, index, array) => {
-    if (index < days - 1) return { ...item, [`MA${days}`]: null };
-    const slice = array.slice(index - days + 1, index + 1);
-    const sum = slice.reduce((acc, curr) => acc + curr.sales, 0);
-    return { ...item, [`MA${days}`]: sum / days };
-  });
-};
+// 정적 데이터
+const salesData = [
+  { date: '2024-01', sales: 8500 },
+  { date: '2024-02', sales: 9200 },
+  { date: '2024-03', sales: 8800 },
+  { date: '2024-04', sales: 9500 },
+  { date: '2024-05', sales: 10000 },
+  { date: '2024-06', sales: 9800 },
+];
 
 const SalesChart = ({ data }) => {
-  const [showMA60, setShowMA60] = useState(false);
-  const [showMA30, setShowMA30] = useState(false);
-
-  const processedData = React.useMemo(() => {
-    let result = data;
-    if (showMA60) result = calculateMovingAverage(result, 60);
-    if (showMA30) result = calculateMovingAverage(result, 30);
-    return result;
-  }, [data, showMA60, showMA30]);
-
   return (
     <div className="bg-white p-4 rounded-lg shadow">
       <h2 className="text-xl font-bold mb-4">판매 추이</h2>
-      <div className="mb-4">
-        <label className="inline-flex items-center mr-4">
-          <input
-            type="checkbox"
-            className="form-checkbox text-blue-600"
-            checked={showMA60}
-            onChange={(e) => setShowMA60(e.target.checked)}
-          />
-          <span className="ml-2">60일 이동평균</span>
-        </label>
-        <label className="inline-flex items-center">
-          <input
-            type="checkbox"
-            className="form-checkbox text-green-600"
-            checked={showMA30}
-            onChange={(e) => setShowMA30(e.target.checked)}
-          />
-          <span className="ml-2">30일 이동평균</span>
-        </label>
-      </div>
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={processedData}>
+        <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="sales" name="일일 판매량" stroke="#3b82f6" strokeWidth={2} />
-          {showMA60 && (
-            <Line type="monotone" dataKey="MA60" name="60일 이동평균" stroke="#10b981" strokeWidth={2} strokeDasharray="5 5" />
-          )}
-          {showMA30 && (
-            <Line type="monotone" dataKey="MA30" name="30일 이동평균" stroke="#f59e0b" strokeWidth={2} strokeDasharray="5 5" />
-          )}
+          <Line type="monotone" dataKey="sales" name="월별 판매량" stroke="#3b82f6" strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -108,8 +59,8 @@ const SalesAnalysis = () => {
         <ul className="list-disc list-inside space-y-2">
           <li>지난 달 대비 판매량이 3.5% 증가했습니다. 이는 계절적 요인과 최근 마케팅 캠페인의 영향으로 보입니다.</li>
           <li>평균 판매가는 소폭 하락했지만, 전체 매출은 증가했습니다. 이는 판매량 증가가 가격 하락을 상쇄했음을 의미합니다.</li>
-          <li>60일 이동평균선을 보면, 전반적인 판매 추세가 상승세임을 알 수 있습니다.</li>
-          <li>30일 이동평균선의 변동성이 더 큰 것으로 보아, 단기적으로는 판매량 변동이 있지만 장기적으로는 안정적인 성장세를 보이고 있습니다.</li>
+          <li>6개월간의 판매 추이를 보면, 전반적인 판매량이 상승세임을 알 수 있습니다.</li>
+          <li>월별 변동성이 있지만, 장기적으로는 안정적인 성장세를 보이고 있습니다.</li>
         </ul>
       </div>
     </div>
