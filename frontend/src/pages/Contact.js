@@ -24,22 +24,23 @@ const Contact = () => {
       <h1 className="text-3xl font-bold mb-6">문의하기</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">연락처 정보</h2>
-          <p className="mb-2">
-            <strong>이메일:</strong> yujin010917@khu.ac.kr
-          </p>
-          <p className="mb-4">
-            <strong>주소:</strong> 서울특별시 동대문구 경희대로 26 경희대학교
-          </p>
-          <h3 className="text-xl font-semibold mb-2">대회 정보</h3>
-          <p className="mb-2">
-            제3회 유통데이터 활용 경진대회, 2024 RETAIL DATA FESTA
-          </p>
-          <p>
-            자세한 정보는 <a href="#" className="text-blue-600 hover:underline">공식 웹사이트</a>를 참조하세요.
-          </p>
-        </section>
+      <section>  
+        <h2 className="text-2xl font-semibold mb-4">연락처 정보</h2>
+        <p className="mb-2">
+          <strong>이메일:</strong> yujin010917@khu.ac.kr
+        </p>  
+        <p className="mb-4">
+          <strong>주소:</strong> 서울특별시 동대문구 경희대로 26 경희대학교
+        </p>
+        <h3 className="text-xl font-semibold mb-2">대회 정보</h3>
+        <p className="mb-2">
+         제3회 유통데이터 활용 경진대회, 2024 RETAIL DATA FESTA
+        </p>
+        <p>
+          자세한 정보는 <a href="https://www.instagram.com/captima_official" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">공식 Instagram</a>을 참조하세요.
+        </p>
+      </section>
+      
         
         <section>
           <h2 className="text-2xl font-semibold mb-4">문의 양식</h2>
