@@ -3,6 +3,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Dashboard from './components/Dashboard/Dashboard';
+import About from './pages/About';
+import Contact from './pages/Contact';
+import Footer from './components/Layout/Footer';
+
 
 const generateMockData = () => {
   const startDate = new Date('2024-01-01');
